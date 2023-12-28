@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<title>Myflix</title>
+{% endblock %}
+
+{% block body %}
+<div class="centered-content">
+    <div class="col">
+        <div class="row-1 pb-2"><a href="/signup" class="btn btn-danger">Sign up!</a></div>
+        <div class="row-1 pb-2"><a href="/login" class="btn btn-danger">Login!</a></div>
+        <div class="row-1"><a href="/home" class="btn btn-danger">Home</a></div>
+    </div>
+</div>
+{% endblock %}

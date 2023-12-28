@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Myflix Home</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mb-2">
+    <div class="col-1 mx-auto"><a class="btn btn-danger" href="/logout">Logout</a></div>
+    <div class="row">
+        <!-- Left Half -->
+
+        <div class="col-3 mx-auto">
+            <h2>Popular on Myflix</h2>
+            {% for item in data %}
+            <a href="">
+                <div class="card mb-2 bg-secondary" style="width: 18rem;">
+                    <img class="card-img-top" src="../static/images/bbb.jpg" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text ">{{item.title}}<br>Length:{{item.length}}
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Right Half -->
+        <div class="col-3 mx-auto">
+            <h2>Recommended for you</h2>
+            {% for item in data %}
+            {{item}}
+            <div class="card card-body mb-3">{{item.title}}</div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

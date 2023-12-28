@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+<script src="{{ url_for('static', filename='js/account.js') }}"></script>
+<title>Myflix Account Sign Up</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="centered-content">
+    <div id="form" onsubmit="handleSubmit(event)">
+        <form id="SignupForm" method="POST">
+            <!-- <div class="form-group">
+                <label for="InputFirstName">First Name</label>
+                <input type="text" class="form-control" id="InputFirstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="InputLastName">Last Name</label>
+                <input type="text" class="form-control" id="InputLastName" placeholder="Last Name">
+            </div> -->
+            <div class="form-group">
+                <label for="InputSignUpEmail">Email address</label>
+                <input type="email" class="form-control" id="InputSignUpEmail" name="InputSignUpEmail"
+                    aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="InputSignUpPassword">Password</label>
+                <input type="password" class="form-control" id="InputSignUpPassword" name="InputSignUpPassword"
+                    onkeyup='check();' placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="InputRepeatPassword">Repeat Password</label>
+                <input type="password" class="form-control" id="InputRepeatPassword" onkeyup='check();'
+                    placeholder="Repeat Password">
+                <span id='message'></span>
+            </div>
+            <button type="submit" class="btn btn-danger">Sign up</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

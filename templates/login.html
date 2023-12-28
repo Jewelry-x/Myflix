@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+<script src="{{ url_for('static', filename='js/account.js') }}"></script>
+<title>Myflix Account Login</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="centered-content">
+    <div id="form" onsubmit="handleSubmit(event)">
+        <form id="LoginForm" method="POST">
+            <div class="form-group">
+                <label for="InputLoginEmail">Email address</label>
+                <input type="email" class="form-control" id="InputLoginEmail" name="InputLoginEmail"
+                    aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="InputPassword">Password</label>
+                <input type="password" class="form-control" id="InputPassword" name="InputPassword"
+                    placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-danger">Login</button>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
