@@ -14,22 +14,25 @@ user = 'root'
 password = 'pass'
 database = 'users'
 
-# Establish a connection to the MySQL server
-conn = mysql.connector.connect(host=host, port=port, user=user, password=password, database=database)
+try: 
+    # Establish a connection to the MySQL server
+    conn = mysql.connector.connect(host=host, port=port, user=user, password=password, database=database)
 
-# Create a cursor object
-cursor = conn.cursor()
+    # Create a cursor object
+    cursor = conn.cursor()
 
-cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        email VARCHAR(255),
-        password VARCHAR(255),
-        admin BOOLEAN DEFAULT FALSE
-    )
-''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            email VARCHAR(255),
+            password VARCHAR(255),
+            admin BOOLEAN DEFAULT FALSE
+        )
+    ''')
 
-conn.commit()
+    conn.commit()
+except mysql.connector.Error as err:
+    print(f"Error: {err}")
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_hex(16)

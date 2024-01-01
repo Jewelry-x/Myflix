@@ -1,0 +1,36 @@
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2204:2023.10.1
+
+    steps:
+      - checkout
+
+      - run:
+          name: Start Python container
+          command: |
+            docker run -dit --name website -p 80:80 python:3.8
+            docker cp $(pwd) website:/repo
+
+      - run:
+          name: Start MongoDB container
+          command: |
+            docker run -d --name mongodb --ip 172.17.0.3 mongo:latest
+
+      - run:
+          name: Start MySQL container
+          command: |
+            docker run -d --name mysql -e MYSQL_DATABASE=users -e MYSQL_ROOT_PASSWORD="pass" --ip 172.17.0.4 mysql:5.7
+      
+      - run:
+          name: Test
+          command: |
+            docker inspect bridge
+            docker exec -it website bin/bash -c "pip install -r repo/requirements.txt"
+            docker exec -it website bin/bash -c "python repo/test.py"
+
+      - run:
+          name: Stop and remove containers
+          command: docker rm -f mongodb mysql
