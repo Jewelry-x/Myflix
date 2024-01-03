@@ -11,13 +11,13 @@
         <!-- Left Half -->
 
         <div class="col-3 mx-auto">
-            <h2>Popular on Myflix</h2>
-            {% for item in data %}
-            <a href="">
+            <h2>Movies on Myflix</h2>
+            {% for movie in movies %}
+            <a href="{{ url_for('select_movie',movie_id=movie.title,movie_file=movie.mp4File)}}">
                 <div class="card mb-2 bg-secondary" style="width: 18rem;">
                     <img class="card-img-top" src="../static/images/bbb.jpg" alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text ">{{item.title}}<br>Length:{{item.length}}
+                        <p class="card-text ">{{movie.title}}<br>Length:{{movie.length}}
                     </div>
                 </div>
             </a>
@@ -27,9 +27,8 @@
         <!-- Right Half -->
         <div class="col-3 mx-auto">
             <h2>Recommended for you</h2>
-            {% for item in data %}
-            {{item}}
-            <div class="card card-body mb-3">{{item.title}}</div>
+            {% for movie in recommendations %}
+            <h3 class="text-danger">{{movie.movieId}}</h3>
             {% endfor %}
         </div>
     </div>

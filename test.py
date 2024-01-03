@@ -1,5 +1,3 @@
-# test_app.py
-
 import unittest
 from app import app
 
@@ -17,7 +15,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Check if a specific element is present in the response data
-        self.assertIn(b'<h1 style="text-align: center" class="display-2">Myflix2</h1>', response.data)
+        self.assertIn(b'<h1 style="text-align: center" class="display-2">Myflix</h1>', response.data)
 
 if __name__ == '__main__':
     unittest.main()
