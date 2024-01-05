@@ -1,24 +1,15 @@
-import subprocess
-import json
+import shutil
 from config import NEO4J_IP
 
 def get_external_ip():
     if NEO4J_IP == 'localhost':
         return 'localhost'
     else:
+        shutil.copyfile('../external_config.py', 'external_config.py')
         try:
-            # Run the 'gcloud' command to get the external IP address
-            result = subprocess.run(
-                ['gcloud', 'compute', 'instances', 'describe', 'your-instance-name', '--zone', 'your-instance-zone', '--format', 'json'],
-                stdout=subprocess.PIPE,
-                check=True
-            )
+            from external_config import EXTERNAL_IP
 
-            # Parse the JSON output and retrieve the external IP address
-            instance_info = json.loads(result.stdout)
-            external_ip = instance_info['networkInterfaces'][0]['accessConfigs'][0]['natIP']
-            
-            return external_ip
-        except subprocess.CalledProcessError as e:
-            print(f"Error retrieving external IP: {e}")
-            return None
+            return EXTERNAL_IP
+        except ImportError:
+            pass
+                    

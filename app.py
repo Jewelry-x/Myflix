@@ -80,7 +80,7 @@ def select_movie(movie_id, movie_file):
     if 'email' in session :
         # Call a function to create a connection between the user and the selected movie
         create_connection(session['email'], movie_id)
-        return redirect(f'http://34.105.214.25:81?video={movie_file}')
+        return redirect(f'http://{get_external_ip()}:81?video={movie_file}')
     else:
         return redirect(url_for('index'))
 
