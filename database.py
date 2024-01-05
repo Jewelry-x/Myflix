@@ -107,15 +107,13 @@ def recommend_movies(user_email, limit=10):
             result = session.run(
                 """
                 MATCH (u:User {email: $userEmail})-[:WATCHED]->(watchedMovie:Movie)
-                WITH u, COLLECT(watchedMovie) AS watchedMovies
+                WITH COLLECT(watchedMovie) AS watchedMovies
 
                 MATCH (m:Movie)
-                WHERE NOT (u)-[:WATCHED]->(m) AND NOT EXISTS { MATCH (u)-[:WATCHED]->(m) }
-                WITH m, SIZE([(u)-[:WATCHED]->(m) WHERE u IN watchedMovies | 1]) AS watchCount
-                ORDER BY watchCount DESC
-                LIMIT $limit
-
+                WHERE NOT m IN watchedMovies
+                WITH m, SIZE([(user)-[:WATCHED]->(m) | user]) AS watchCount
                 RETURN m.id AS movieId, watchCount
+                ORDER BY watchCount DESC
                 """,
                 userEmail=user_email,
                 limit=limit
@@ -153,7 +151,6 @@ def user_exists(cursor, email):
     query = "SELECT COUNT(*) FROM users WHERE email = %s"
     cursor.execute(query, (email,))
     result = cursor.fetchone()
-    print("User already exists")
     return result[0] > 0
 
 #MongoDB
